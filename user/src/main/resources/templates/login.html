@@ -1,63 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>第一个 boot strap</title>
+  <link rel="stylesheet" th:href="@{/static/bootstrap-3.4.1/css/bootstrap.min.css}">
+  <style>
+    .user-login-form{
+      max-width: 550px;
+      margin: 50px auto;
+      padding: 50px 50px;
+      background: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 35px rgba(0, 0, 0, 0.1);
+    }
+    .user-login-form h3{
+      text-align:center;
+    }
+  </style>
 </head>
-<body id="top">
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TAGCODE"
-                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-<div class="page_loader"></div>
 
-<!-- Login 24 start -->
-<div class="login-24">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="form-section">
-          <div class="logo-2">
-            <a href="login-24.html">
-              <img src="assets/img/logos/logo-2.png" alt="logo">
-            </a>
-          </div>
-          <h3>Sign into your account</h3>
-          <form action="#" method="GET">
-            <div class="form-group form-box">
-              <input type="email" name="email" class="input-text" placeholder="Email Address">
-            </div>
-            <div class="form-group form-box">
-              <input type="password" name="Password" class="input-text" placeholder="Password">
-            </div>
-            <div class="form-group mb-0 clearfix">
-              <button type="submit" class="btn-md btn-theme float-left">Login</button>
-              <a href="forgot-password-24.html" class="forgot-password">Forgot Password</a>
-            </div>
-            <div class="extra-login clearfix">
-              <span>Or Login With</span>
-            </div>
-            <div class="clearfix"></div>
-            <ul class="social-list">
-              <li><a href="#" class="facebook-color"><i class="fa fa-facebook facebook-i"></i><span>Facebook</span></a></li>
-              <li><a href="#" class="twitter-color"><i class="fa fa-twitter twitter-i"></i><span>Twitter</span></a></li>
-              <li><a href="#" class="google-color"><i class="fa fa-google google-i"></i><span>Google</span></a></li>
-            </ul>
-          </form>
-          <p>Don't have an account? <a href="register-24.html" class="thembo"> Register here</a></p>
-        </div>
+<body>
+<div class="container">
+  <div class="user-login-form">
+    <h3>请用您的账号登陆</h3>
+    <form action="">
+      <div class="form-group">
+        <label for="name">用户名</label>
+        <input type="text" class="form-control" id="name" placeholder="用户名">
       </div>
-    </div>
+      <div class="form-group">
+        <label for="password">密码</label>
+        <input type="password" class="form-control" id="password" placeholder="密码">
+      </div>
+      <button type="submit" class="btn btn-primary">登陆</button>
+    </form>
   </div>
 </div>
-<!-- Login 24 end -->
-
-<!-- External JS libraries -->
-<script src="assets/js/jquery-2.2.0.min.js"></script>
-<script src="assets/js/popper.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<!-- Custom JS Script -->
-
-
+  <script th:src="@{/static/js/jquery.3.3.1.min.js}"></script>
+  <script th:src="@{/static/bootstrap-3.4.1/js/bootstrap.js}"></script>
 </body>
 </html>

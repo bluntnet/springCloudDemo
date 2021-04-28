@@ -25,7 +25,7 @@
 <div class="container">
   <div class="user-login-form">
     <h3>请用您的账号登陆</h3>
-    <form action="">
+    <form th:action="@{/login/authentication}" method="post">
       <div class="form-group">
         <label for="name">用户名</label>
         <input type="text" class="form-control" id="name" placeholder="用户名">

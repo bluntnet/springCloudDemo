@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace 非常重要：必须是 Mapper 类的全路径-->
+<mapper namespace="demo.mapper.AccountMapper">
+    <resultMap id="account" type="demo.bean.Account" >
+        <result column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="password" property="password" />
+        <result column="phone_" property="phone" />
+    </resultMap>
+    <!-- 用户查询结果的列 -->
+    <sql id="base_columns">
+        t.id AS id, t.name, t.password, t.phone
+    </sql>
+    <select id="loadByName" resultMap="account">
+        SELECT <include refid="base_columns"/>
+        FROM account AS t
+        WHERE t.name = #{name}
+    </select>
+
+</mapper>

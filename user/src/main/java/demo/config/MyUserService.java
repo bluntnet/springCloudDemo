@@ -29,10 +29,10 @@ public class MyUserService implements UserDetailsService {
         }
         List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
         log.debug("====[load account] = {}", account);
-        if (account.getRole() == 1) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        if (account.getRole() == 0) {
+            authorities.add(new SimpleGrantedAuthority(RoleConstant.PRE_ROLE+RoleConstant.ADMIN));
         } else {
-            authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+            authorities.add(new SimpleGrantedAuthority(RoleConstant.PRE_ROLE+RoleConstant.USER));
         }
         return new User(account.getName(), account.getPassword(), authorities);
     }

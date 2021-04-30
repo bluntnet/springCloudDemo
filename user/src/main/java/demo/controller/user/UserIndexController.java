@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class UserIndexController {
+
     @RequestMapping("/user/index")
-    public String index(Model model) {
+    public String userIndex(Model model) {
         return "user/index";
     }
 }

@@ -2,6 +2,7 @@ package demo.config;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
@@ -20,6 +22,9 @@ import java.util.List;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
+    private AuthenticationSuccessHandler myAuthenticationSuccessHandler;
+
+    @Autowired
     private MyUserService myUserService;
 
     @Override
@@ -28,10 +33,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .formLogin().loginPage("/login")
                 .usernameParameter("username").passwordParameter("password")
-                .loginProcessingUrl("/login/authentication").and()
+                .loginProcessingUrl("/login/authentication")
+                .successHandler(myAuthenticationSuccessHandler)
+                .and()
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasAnyRole("ADMIN")
-                .antMatchers("/client/**").hasAnyRole("USER")
+                .antMatchers("/admin/**").hasRole(RoleConstant.ADMIN)
+                .antMatchers("/user/**").hasRole(RoleConstant.USER)
                 .antMatchers(getPermitAllList()).permitAll()
                 .anyRequest()
                 .authenticated();
@@ -45,6 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -57,5 +65,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private String[] getPermitAllList() {
         return new String[]{"/static/**", "/login/**"};
+    }
+
+    public static void main(String[] args) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String userPassword = encoder.encode("user");
+        System.out.println(userPassword);
     }
 }

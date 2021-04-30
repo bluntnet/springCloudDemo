@@ -28,18 +28,16 @@ public class AuthenticationHandler {
                 if (userDetails.getAuthorities() != null && userDetails.getAuthorities().size() > 0) {
                     Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
                     for (GrantedAuthority grant : authorities) {
-                        log.debug("=========RoleConstant.ADMIN======={}", RoleConstant.ADMIN);
-                        log.debug("===onAuthenticationSuccess==={},role={}", userDetails.getUsername(), grant.getAuthority());
-                        if (RoleConstant.ADMIN.equals(grant.getAuthority())) {
+                        if (grant.getAuthority().contains(RoleConstant.ADMIN)) {
                             isAdmin = true;
                         }
                     }
                 }
                 StringBuilder sb = new StringBuilder(request.getContextPath());
                 if (isAdmin) {
-                    sb.append("/admin");
+                    sb.append("/admin/index");
                 } else {
-                    sb.append("/user");
+                    sb.append("/user/index");
                 }
                 response.sendRedirect(sb.toString());
             }

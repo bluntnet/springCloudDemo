@@ -8,8 +8,15 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
+@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -19,18 +26,36 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
+                .formLogin().loginPage("/login")
+                .usernameParameter("username").passwordParameter("password")
+                .loginProcessingUrl("/login/authentication").and()
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasAnyRole("ADMIN")
-                .antMatchers("/static/**").permitAll()
+                .antMatchers("/client/**").hasAnyRole("USER")
+                .antMatchers(getPermitAllList()).permitAll()
                 .anyRequest()
-                .authenticated()
-                .and().formLogin().loginPage("/login").permitAll().loginProcessingUrl("/login/authentication").permitAll();
+                .authenticated();
 
+        // //解决中文乱码问题
+        // CharacterEncodingFilter filter = new CharacterEncodingFilter();
+        // filter.setEncoding("UTF-8");
+        // filter.setForceEncoding(true);
+        // //
+        // http.addFilterBefore(filter, CsrfFilter.class);
 
     }
 
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(myUserService).passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService(myUserService).passwordEncoder(passwordEncoder());
+    }
+
+    private String[] getPermitAllList() {
+        return new String[]{"/static/**", "/login/**"};
     }
 }

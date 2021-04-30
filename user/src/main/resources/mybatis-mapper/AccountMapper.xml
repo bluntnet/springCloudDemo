@@ -7,12 +7,13 @@
         <result column="id" property="id" />
         <result column="name" property="name" />
         <result column="password" property="password" />
-        <result column="phone_" property="phone" />
+        <result column="phone" property="phone" />
     </resultMap>
     <!-- 用户查询结果的列 -->
     <sql id="base_columns">
-        t.id AS id, t.name, t.password, t.phone
+        t.id AS id, t.name, t.password, t.phone, t.role
     </sql>
+    <!-- 用户登陆的验证 -->
     <select id="loadByName" resultMap="account">
         SELECT <include refid="base_columns"/>
         FROM account AS t

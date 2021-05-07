@@ -2,6 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>管理员界面</title>
     <link rel="stylesheet" th:href="@{/static/bootstrap-3.4.1/css/bootstrap.min.css}">
 </head>
@@ -29,9 +31,41 @@
     <button class="btn btn-info">info样式</button>
     <button class="btn btn-warning">warning样式</button>
     <button class="btn btn-danger">danger样式</button>
-    <button class="btn btn-link">link样式</button>
+    <button class="btn btn-link" onclick="showAdmin()">取得 redis 中的 admin11</button>
+    <div id="adminContainer"></div>
+<div id="left-menu">
+    <ul class="nav nav-pills nav-stacked">
+        <!-- 侧边栏选项 -->
+        <li role="presentation" class="active">
+            <!-- 选项控制data-target对应的显隐 -->
+            <a href="#" data-toggle="collapse" data-target="#list">商品管理</a>
+            <!-- 隐藏的详细菜单 -->
+            <ul id="list" class="collapse in">
+                <li class="active">
+                    <a href="">
+                        操作一
+                    </a>
+                </li>
+                <li><a href="">操作二</a></li>
+            </ul>
+        </li>
+        <li role="presentation"><a href="#">Profile</a></li>
+        <li role="presentation"><a href="#">Messages</a></li>
+    </ul>
 </div>
 <script th:src="@{/static/js/jquery.3.3.1.min.js}"></script>
 <script th:src="@{/static/bootstrap-3.4.1/js/bootstrap.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+function showAdmin(){
+    let path = [[@{/admin/fromRedis}]];
+    console.log('path======='+path);
+    $.get(path, function(data){
+        console.log(data);
+        if(data.success && data.data.realName){
+            $('#adminContainer').append(data.data.realName+"<br>");
+        }
+    });
+}
+</script>
 </body>
 </html>

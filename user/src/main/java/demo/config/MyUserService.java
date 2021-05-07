@@ -4,6 +4,7 @@ import demo.bean.Account;
 import demo.mapper.AccountMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +13,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -27,13 +30,15 @@ public class MyUserService implements UserDetailsService {
         if (account == null) {
             throw new RuntimeException("用户不存在" + s);
         }
-        List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
+        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         log.debug("====[load account] = {}", account);
         if (account.getRole() == 0) {
             authorities.add(new SimpleGrantedAuthority(RoleConstant.PRE_ROLE + RoleConstant.ADMIN));
         } else {
             authorities.add(new SimpleGrantedAuthority(RoleConstant.PRE_ROLE + RoleConstant.USER));
         }
-        return new User(account.getName(), account.getPassword(), authorities);
+        //AuthorityUtils.createAuthorityList(user.getRoles().toArray(new String[]{})
+        account.setAuthorities(authorities);
+        return account;
     }
 }

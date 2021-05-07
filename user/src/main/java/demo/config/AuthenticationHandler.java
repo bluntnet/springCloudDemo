@@ -23,6 +23,7 @@ public class AuthenticationHandler {
             @Override
             public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
                 log.debug("===onAuthenticationSuccess==={}", authentication);
+
                 UserDetails userDetails = (UserDetails) authentication.getPrincipal();
                 boolean isAdmin = false;
                 if (userDetails.getAuthorities() != null && userDetails.getAuthorities().size() > 0) {

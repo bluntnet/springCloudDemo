@@ -64,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private String[] getPermitAllList() {
-        return new String[]{"/static/**", "/login/**"};
+        return new String[]{"/static/**", "/login/**","/swagger-ui.html"};
     }
 
     public static void main(String[] args) {

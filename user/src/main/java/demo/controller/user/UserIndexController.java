@@ -11,4 +11,5 @@ public class UserIndexController {
     public String userIndex(Model model) {
         return "user/index";
     }
+
 }

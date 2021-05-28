@@ -42,6 +42,17 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <version>5.1.12</version>
             </dependency>
+            <!-- 在线文档的类 -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>2.2.2</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>2.2.2</version>
+            </dependency>
             <!-- 公共的类库 -->
             <dependency>
                 <groupId>org.example</groupId>

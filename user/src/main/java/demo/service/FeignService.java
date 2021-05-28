@@ -1,6 +1,5 @@
 package demo.service;
 
-import com.netflix.discovery.converters.Auto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -8,12 +7,12 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @Service
-public class RibbonService {
-    @Autowired
-    RestTemplate restTemplate;
+public class FeignService {
 
+    @Autowired
+    EurekaClientFeign eurekaClientFeign;
 
     public List<String> getUser() {
-        return restTemplate.getForObject("http://eureka-client-sale/black", List.class);
+        return eurekaClientFeign.getBlack();
     }
 }

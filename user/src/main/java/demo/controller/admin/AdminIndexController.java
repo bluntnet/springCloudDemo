@@ -5,6 +5,7 @@ import demo.bean.Account;
 import demo.controller.BaseController;
 import demo.helper.RedisDao;
 import demo.helper.Result;
+import demo.service.FeignService;
 import demo.service.RibbonService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,8 +25,12 @@ public class AdminIndexController extends BaseController {
 
     @Autowired
     RedisDao redisDao;
+
     @Autowired
     RibbonService ribbonService;
+
+    @Autowired
+    FeignService feignService;
 
     @RequestMapping(value = "/admin/index", method = RequestMethod.GET)
     public String adminIndex(Model model) {
@@ -51,8 +56,9 @@ public class AdminIndexController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value="/admin/black",method = RequestMethod.GET)
-    public List<String> getBlack(){
-        return ribbonService.getUser();
+    @RequestMapping(value = "/admin/black", method = RequestMethod.GET)
+    public List<String> getBlack() {
+        //return ribbonService.getUser();
+        return feignService.getUser();
     }
 }

@@ -50,6 +50,12 @@ spring:
         max-wait: -1
   level:
     demo: debug
+  application:
+    name: eureka-ribbon-client-user
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
 
 mybatis:
   mapper-locations: classpath:/mybatis-mapper/*Mapper.xml

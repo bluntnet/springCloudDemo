@@ -1,9 +1,11 @@
 package demo.controller.admin;
 
+import com.netflix.discovery.converters.Auto;
 import demo.bean.Account;
 import demo.controller.BaseController;
 import demo.helper.RedisDao;
 import demo.helper.Result;
+import demo.service.RibbonService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +16,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 @Api(tags = "管理接口", value = "测试类")
 public class AdminIndexController extends BaseController {
 
     @Autowired
     RedisDao redisDao;
+    @Autowired
+    RibbonService ribbonService;
 
     @RequestMapping(value = "/admin/index", method = RequestMethod.GET)
     public String adminIndex(Model model) {
@@ -42,5 +48,11 @@ public class AdminIndexController extends BaseController {
     public Result add(@RequestBody Account account) {
 
         return Result.ok(account);
+    }
+
+    @ResponseBody
+    @RequestMapping(value="/admin/black",method = RequestMethod.GET)
+    public List<String> getBlack(){
+        return ribbonService.getUser();
     }
 }

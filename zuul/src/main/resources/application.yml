@@ -1,0 +1,19 @@
+
+
+server:
+  port: 5000
+zuul:
+  routes:
+    saleapi:
+      path: /saleapi/**
+      serviceId: eureka-client-sale
+    userapi:
+      path: /userapi/**
+      serviceId: eureka-ribbon-client-user
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  application:
+    name: service-zuul

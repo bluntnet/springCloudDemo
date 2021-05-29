@@ -64,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     private String[] getPermitAllList() {
-        return new String[]{"/static/**", "/login/**","/swagger-ui.html","/webjars/**"};
+        return new String[]{"/static/**", "/login/**","/swagger-ui.html","/webjars/**","/hystrix/**","/hystrix.stream"};
     }
 
     public static void main(String[] args) {

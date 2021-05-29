@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userName` varchar(255) DEFAULT NULL COMMENT '姓名',
+  `name` varchar(255) DEFAULT NULL COMMENT '姓名',
   `password` varchar(255) DEFAULT NULL COMMENT '密码',
   `phone` varchar(20) DEFAULT NULL COMMENT  '手机号',
   `role` INTEGER DEFAULT 0,

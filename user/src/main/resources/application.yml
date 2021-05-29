@@ -72,4 +72,7 @@ management:
       ## 关闭应用程序的命令
       enabled: true
 ## Actuator 对外
-
+## feign 的 hystrix 的熔断器
+feign:
+  hystrix:
+    enabled: true

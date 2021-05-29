@@ -24,7 +24,7 @@ public class Swagger2Config {
     }
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("spingboot 利用 swagger 构建 api 文档 ")
+        return new ApiInfoBuilder().title("springBoot 利用 swagger 构建 api 文档 ")
                 .description("简单优雅的 restful 风格").version(VERSION).build();
     }
 }

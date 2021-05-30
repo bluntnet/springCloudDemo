@@ -12,7 +12,7 @@ zuul:
       path: /userapi/**
       serviceId: eureka-ribbon-client-user
 # 增加前缀
-  prefix: /v1
+#  prefix: /v1
 eureka:
   client:
     service-url:

@@ -17,7 +17,7 @@ public class BlackController {
 
     @RequestMapping(value = "/black", method = {RequestMethod.GET})
     public List<String> getBlackList(String version) {
-        String[] black = {"张三", "cat", "李四1", port};
+        String[] black = {"张三", "cat", "李四2", port};
         return Arrays.asList(black);
     }
 

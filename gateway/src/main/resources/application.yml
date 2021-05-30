@@ -7,7 +7,8 @@ spring:
     gateway:
       discovery:
         locator:
-          enabled: true
+          # 地址栏里面加 application name 的方式访问
+          enabled: false
           lower-case-service-id: true
       routes:
         - id: eureka-client-sale

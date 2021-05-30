@@ -15,9 +15,9 @@ vue add element-plus
 ### 打包，需要先加 mvn 的 spring-boot 插件
 打 jar 
 ~~~ 
-mvn package spring-boot:repackage
+mvn clean package
 ~~~
 打 fat jar 
 ~~~
-mvn package spring-boot:repackage  
+mvn clean package spring-boot:repackage  
 ~~~

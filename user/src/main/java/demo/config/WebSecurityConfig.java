@@ -32,23 +32,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .formLogin().loginPage("/login")
-                .usernameParameter("username").passwordParameter("password")
-                .loginProcessingUrl("/login/authentication")
-                .successHandler(myAuthenticationSuccessHandler)
+                .usernameParameter("username").passwordParameter("password")// 字段名字
+                .loginProcessingUrl("/login/authentication") // 点击提交访问的 url
+                .successHandler(myAuthenticationSuccessHandler) // authentication 认证成功之后执行的方法
                 .and()
-                .authorizeRequests()
-                .antMatchers("/admin/**").hasRole(RoleConstant.ADMIN)
-                .antMatchers("/user/**").hasRole(RoleConstant.USER)
-                .antMatchers(getPermitAllList()).permitAll()
-                .anyRequest()
+                .authorizeRequests() //对 url 增加验证授权
+                .antMatchers("/admin/**").hasRole(RoleConstant.ADMIN)// 有 admin 授权的人可以访问
+                .antMatchers("/user/**").hasRole(RoleConstant.USER)// 有 user 授权的人可以访问
+                .antMatchers(getPermitAllList()).permitAll()//都可以访问
+                .anyRequest()//别的 url 跳转到登录页面
                 .authenticated();
 
-        // //解决中文乱码问题
-        // CharacterEncodingFilter filter = new CharacterEncodingFilter();
-        // filter.setEncoding("UTF-8");
-        // filter.setForceEncoding(true);
-        // //
-        // http.addFilterBefore(filter, CsrfFilter.class);
 
     }
 

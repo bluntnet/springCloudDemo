@@ -15,6 +15,7 @@
         <module>eureka-server</module>
         <module>zuul</module>
         <module>gateway</module>
+        <module>auth-service</module>
     </modules>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

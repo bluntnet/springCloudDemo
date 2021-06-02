@@ -7,8 +7,17 @@ eureka:
 spring:
   application:
     name: eureka-client-sale
-
-
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring_boot_demo?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  main:
+    allow-bean-definition-overriding: true
 management:
   endpoints:
     web:
@@ -21,3 +30,13 @@ management:
       ## 关闭应用程序的命令
       enabled: true
 ## Actuator 对外
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:5000/uaa/users/current
+    client:
+      clientId: eureka-client-sale
+      clientSecret: 123456
+      acessTokenUri: http://localhost:5000/uaa/oauth/token
+      grant-type: client_credentials,password
+      scope: server

@@ -54,7 +54,7 @@ public class BlackController {
     @RequestMapping("/hello")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String hello() {
-        return "hello" + port;
+        return "hello you " + port;
     }
 
     @RequestMapping("/getPrinciple")

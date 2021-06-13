@@ -6,3 +6,17 @@ auth-service/auth-service.iml
 base/base.iml
 
 *.iml
+
+auth-service/target/
+
+base/target/
+
+eureka-server/target/
+
+gateway/target/
+
+user/target/
+
+sale/target/
+
+zuul/target/

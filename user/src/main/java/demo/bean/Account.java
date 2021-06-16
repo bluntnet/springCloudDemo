@@ -13,23 +13,17 @@ import java.util.Set;
 public class Account implements UserDetails {
     Long id;
     String username;
+    @JsonIgnore
     String password;
     String phone;
     Set<Role> authorities;
 
-
-    @JsonIgnore
     public Set<? extends GrantedAuthority> getAuthorities() {
         return authorities;
     }
+
     public void setAuthorities(Set<? extends GrantedAuthority> authorities) {
         this.authorities = (Set<Role>) authorities;
-    }
-
-    @JsonIgnore
-    @Override
-    public String getUsername() {
-        return this.username;
     }
 
     @JsonIgnore

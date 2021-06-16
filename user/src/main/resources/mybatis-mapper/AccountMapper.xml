@@ -26,7 +26,7 @@
 
     <resultMap id="accountWithRole" type="demo.bean.Account">
         <result column="id" property="id" />
-        <result column="name" property="username" />
+        <result column="username" property="username" />
         <result column="password" property="password" />
         <result column="phone" property="phone" />
         <collection property="authorities" ofType="demo.bean.Role" columnPrefix="r_">

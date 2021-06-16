@@ -30,7 +30,8 @@ CREATE TABLE `user_role` (
   KEY `FKa68196081fvovjhkek5m97n3y` (`role_id`),
   KEY `FK859n2jvi8ivhui0rl0esws6o` (`user_id`),
   CONSTRAINT `FK859n2jvi8ivhui0rl0esws6o` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `FKa68196081fvovjhkek5m97n3y` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) };
+  CONSTRAINT `FKa68196081fvovjhkek5m97n3y` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
+);
 
 # 客户端表
 
@@ -62,6 +63,8 @@ CREATE TABLE `oauth_access_token` (
   `refresh_token` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`authentication_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+
 DROP TABLE IF EXISTS `oauth_approvals`;
 CREATE TABLE `oauth_approvals` (
   `userId` varchar(256) DEFAULT NULL,
@@ -96,11 +99,13 @@ CREATE TABLE `oauth_client_token` (
   `client_id` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`authentication_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
 DROP TABLE IF EXISTS `oauth_code`;
 CREATE TABLE `oauth_code` (
   `code` varchar(256) DEFAULT NULL,
   `authentication` blob
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
 DROP TABLE IF EXISTS `oauth_refresh_token`;
 CREATE TABLE `oauth_refresh_token` (
   `token_id` varchar(256) DEFAULT NULL,

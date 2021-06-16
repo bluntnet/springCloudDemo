@@ -6,5 +6,5 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface AccountMapper {
-    public Account loadByName(@Param("name") String name);
+    Account loadByName(@Param("name") String name);
 }

@@ -39,6 +39,12 @@ public class AdminIndexController extends BaseController {
         return "admin/index";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/admin/get", method = RequestMethod.GET)
+    public Account get(Model model) {
+        return getCurrentAccount();
+    }
+
     @RequestMapping(value = "/admin/fromRedis", method = RequestMethod.GET)
     @ResponseBody
     @ApiOperation(value = "从 Redis 中取得用户", notes = "从 Redis 取得用户 from notes")
@@ -51,7 +57,6 @@ public class AdminIndexController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/admin/add", method = RequestMethod.POST)
     public Result add(@RequestBody Account account) {
-
         return Result.ok(account);
     }
 

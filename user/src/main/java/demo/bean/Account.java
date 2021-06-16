@@ -6,36 +6,30 @@ import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
 import java.util.Set;
 
 @Data
 @ToString
 public class Account implements UserDetails {
     Long id;
-    String name;
+    String username;
     String password;
     String phone;
-    String realName="汉字";
-    int role;
+    Set<Role> authorities;
 
 
-    //
-
-    @JsonIgnore
-    Set<? extends GrantedAuthority> authorities;
     @JsonIgnore
     public Set<? extends GrantedAuthority> getAuthorities() {
         return authorities;
     }
     public void setAuthorities(Set<? extends GrantedAuthority> authorities) {
-        this.authorities = authorities;
+        this.authorities = (Set<Role>) authorities;
     }
 
     @JsonIgnore
     @Override
     public String getUsername() {
-        return this.name;
+        return this.username;
     }
 
     @JsonIgnore

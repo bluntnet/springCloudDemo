@@ -1,0 +1,25 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: spring-cloud-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          # 地址栏里面加 application name 的方式访问
+          enabled: false
+          lower-case-service-id: true
+      routes:
+        - id: eureka-client-sale
+          uri: lb://EUREKA-CLIENT-SALE
+          predicates:
+            - Path=/saleapi/**
+          filters:
+            - StripPrefix=1
+# 增加前缀
+#  prefix: /v1
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

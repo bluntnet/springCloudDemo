@@ -29,6 +29,7 @@ public class AuthenticationHandler {
                 if (userDetails.getAuthorities() != null && userDetails.getAuthorities().size() > 0) {
                     Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
                     for (GrantedAuthority grant : authorities) {
+                        log.debug("list user grant " + grant);
                         if (grant.getAuthority().contains(RoleConstant.ADMIN)) {
                             isAdmin = true;
                         }

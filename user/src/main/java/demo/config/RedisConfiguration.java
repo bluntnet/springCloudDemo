@@ -20,6 +20,7 @@ public class RedisConfiguration {
         RedisTemplate template = new RedisTemplate();
         template.setConnectionFactory(connectionFactory);
 
+        template.setConnectionFactory(connectionFactory);
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
         objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);

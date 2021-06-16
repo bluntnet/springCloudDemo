@@ -1,4 +1,4 @@
-package demo.config;
+package demo.service;
 
 import demo.bean.Account;
 import demo.mapper.AccountMapper;
@@ -30,15 +30,19 @@ public class MyUserService implements UserDetailsService {
         if (account == null) {
             throw new RuntimeException("用户不存在" + s);
         }
-        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+
+        log.debug("account . authorize = authorize.size() = "+account.getAuthorities().size());
+
+        /*Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         log.debug("====[load account] = {}", account);
+
         if (account.getRole() == 0) {
             authorities.add(new SimpleGrantedAuthority(RoleConstant.PRE_ROLE + RoleConstant.ADMIN));
         } else {
             authorities.add(new SimpleGrantedAuthority(RoleConstant.PRE_ROLE + RoleConstant.USER));
         }
         //AuthorityUtils.createAuthorityList(user.getRoles().toArray(new String[]{})
-        account.setAuthorities(authorities);
+        account.setAuthorities(authorities);*/
         return account;
     }
 }

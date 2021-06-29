@@ -5,7 +5,6 @@ import demo.base.utils.number.WordNumberFactory;
 import demo.base.utils.utils.OmmlUtils;
 import demo.base.utils.utils.WmfUtils;
 import demo.base.utils.utils.WordMyUnits;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.openxml4j.opc.PackagePart;
 import org.apache.poi.xwpf.usermodel.*;
@@ -72,7 +71,15 @@ public class ParseWordUtils {
     private static String handleTable(StringBuilder content, IBodyElement body, Map<BigInteger, IWordNumber> wordNumberMap, ImageParse imageParser) {
         XWPFTable table = (XWPFTable) body;
         List<XWPFTableRow> rows = table.getRows();
+
+        String tableHtml =HandleWordTable.getTableHtml(table);
+
+        content.append(tableHtml);
+        /*
+
         content.append("<table style=\"border-collapse: collapse;\" border=\"1\" cellspacing=\"0\" cellpadding=\"5\">");
+
+
         for (XWPFTableRow row : rows) {
             content.append("<tr>");
             List<XWPFTableCell> cells = row.getTableCells();
@@ -86,7 +93,7 @@ public class ParseWordUtils {
             }
             content.append("</tr>\n");
         }
-        content.append("</table>\n");
+        content.append("</table>\n");*/
         return null;
     }
 
@@ -165,7 +172,7 @@ public class ParseWordUtils {
         return null;
     }
 
-    public static Node getChildChainNode(Node node, String... nodeName) {
+    private static Node getChildChainNode(Node node, String... nodeName) {
         Node childNode = node;
         for (int i = 0; i < nodeName.length; i++) {
             String tmp = nodeName[i];
@@ -276,7 +283,7 @@ public class ParseWordUtils {
         if (c.equals("\n")) {
             c = "<br>";
         } else {
-            if (run.getColor() != null) {
+            if (run.getColor() != null && !run.getColor().equals("000000")) {
                 c = "<span style='color:#" + run.getColor().toLowerCase() + ";'>" + c + "</span>";
             }
         }
@@ -297,9 +304,9 @@ public class ParseWordUtils {
     }
 
     public static void main(String[] args) throws IOException {
-        String filepath = "D:\\开发文档\\讲义_资产评估基础（2021年）_基础精讲_方阳阳_第一章　资产评估概述.docx";
-        String target = "D:\\开发文档\\parse";
-        String html = target + "\\index.html";
+        String filepath = "D:\\开发文档\\课件讲义\\table_demo.docx";
+        String target = "D:\\开发文档\\课件讲义\\parse";
+        String html = target + "\\demo_index.html";
         String s = ParseWordUtils.parseDocxContentToHTML(new FileInputStream(filepath), new ImageParse(target, ""));
         System.out.println(s);
         Files.write(Paths.get(html), s.getBytes());

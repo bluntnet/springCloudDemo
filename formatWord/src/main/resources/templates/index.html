@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title>Welcome to nginx!</title>
+    <script th:src="@{/statics/wangEditor.min.js}" charset="utf-8"></script>
+    <script th:src="@{/statics/jquery-1.11.1.min.js}" charset="utf-8"></script>
+    <style>
+    body {
+        width: 65em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+富文本编辑器
+<div id="divRichText"></div>
+<p>需要下载的源代码，增加了自动生成锚点和题目答案加注释的功能</p>
+<textarea id="myTextarea" style="width:100%;height:300px">
+</textarea>
+    <!-- 引入 wangEditor.min.js -->
+    <script th:inline="javascript">
+    const E = window.wangEditor
+    const editor = new E('#divRichText')
+    // 或者 const editor = new E( document.getElementById('div1') )
+    editor.create()
+    const postUrl = [[@{/downloadHtml}]];
+
+    editor.config.onchange = function (newHtml) {
+        let content = editor.txt.html();
+        postContent(content);
+    }
+    function postContent(content){
+        //let content = editor.txt.html();
+        $.post(postUrl,{content:content,chapter:'0101'},function(data){
+            $('#pre').text(data);
+            $('#myTextarea').val(data);
+        });
+    }
+    $('#copyBtn').on('click',function(){
+
+    })
+</script>
+</body>
+</html>

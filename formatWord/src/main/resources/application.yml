@@ -1,0 +1,23 @@
+### web
+server:
+  port: 8080
+  servlet:
+    context-path: /
+### resources
+spring:
+  mvc:
+    servlet:
+      load-on-startup: 0
+  thymeleaf:
+    mode: HTML
+    encoding: UTF-8
+    cache: false
+  devtools:
+    restart:
+      enabled: true
+      exclude: WEB-INF/**
+# spring redis
+  level:
+    demo: debug
+  application:
+    name: word-format

@@ -1,6 +1,5 @@
 package demo.base.utils.word;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.xmlbeans.XmlCursor;

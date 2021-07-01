@@ -39,7 +39,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
             <!-- mybatis-starter：mybatis + mybatis-spring + hikari（default） -->
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
@@ -89,7 +88,6 @@
                 <artifactId>commons-io</artifactId>
                 <version>2.7</version>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
     <build>

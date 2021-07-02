@@ -19,6 +19,11 @@
     </style>
 </head>
 <body>
+<fieldset>
+    <legend>设置</legend>
+    <label><input type="checkbox" id="paragraphIndent" name="paragraphIndent"></input>首行缩进两个全角空格</label>
+    <label><input type="checkbox" id="replaceTagU" name="replaceTagU"></input>替换&lt;u&gt;为&lt;span class="font14zd"&gt;</label>
+</fieldset>
 <p class="p-desc">需要粘贴 word 的富文本编辑器</p>
 <div id="divRichText"></div>
 <p class="p-desc">需要下载的源代码，增加了自动生成锚点和题目答案加注释的功能</p>
@@ -27,25 +32,35 @@
 <script th:inline="javascript">
     const E = window.wangEditor
     const editor = new E('#divRichText');
+    const inputIndent = $('#paragraphIndent');
+    const replaceTagU = $('#replaceTagU');
     editor.config.placeholder = '在这里粘贴 word 复制的文字'
     editor.config.uploadImgShowBase64 = true;
     editor.create()
-    const postUrl = [[@{/downloadHtml}]];
+    const postUrl = [[@{/convert}]];
 
     editor.config.onchange = function (newHtml) {
-        let content = editor.txt.html();
-
-        postContent(content);
+        postContent();
     }
-    function postContent(content){
-        $.post(postUrl,{content:content,chapter:'0101'},function(data){
+    inputIndent.on('click',function(){
+        postContent();
+    });
+    replaceTagU.on('click', function(){
+        postContent();
+    });
+    function postContent(){
+        let content = editor.txt.html();
+        let paragraphIndent = inputIndent.prop('checked');
+        let replaceTagUValue = replaceTagU.prop('checked');
+        $.post(postUrl,{content:content, chapter:'0101',
+                        paragraphIndent: paragraphIndent,
+                        replaceTagU: replaceTagUValue}, function(data){
             if(data.success){
                 let myData = data.data;
                 $('#myTextarea').val(myData);
             }
         });
     }
-
     editor.config.linkImgCallback = function (src,alt,href) {
         console.log('图片 src ', src)
         console.log('图片文字说明',alt)

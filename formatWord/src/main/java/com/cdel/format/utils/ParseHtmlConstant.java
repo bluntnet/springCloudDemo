@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 
 public class ParseHtmlConstant {
 
-    public static Pattern REG_TIME_ANCHOR = Pattern.compile("\\d{2}:\\d{2}:\\d{2}");
+    public static Pattern REG_TIME_ANCHOR = Pattern.compile("(\\d{2}:\\d{2}:\\d{2})");
 
 
     public static String NODE_TEXT_START_TEMPLATE = "<!-- NodeText(%s,%s,%s);-->";

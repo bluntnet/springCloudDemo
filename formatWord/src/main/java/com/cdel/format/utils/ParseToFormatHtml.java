@@ -1,7 +1,6 @@
 package com.cdel.format.utils;
 
 import com.cdel.format.bean.InputBean;
-import com.sun.javafx.binding.StringFormatter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -67,24 +66,25 @@ public class ParseToFormatHtml {
                 if (paragraphIndent && needIndent) {
                     sb.append(TWO_SPACE_INDENT);
                 }
-                handlePElement(element );
+                handleParagraphElement(element);
                 sb.append(element.outerHtml() + END_LINE);
             } else if (tagName.equals(ParseHtmlConstant.TAG_TABLE)) {
-                String content = parseTable(element);
+                String content = handleTableElement(element);
                 sb.append(content);
             }
         }
         sb.append(ParseHtmlConstant.NODE_TEXT_END + END_LINE);
         return sb.toString();
     }
-    private void handlePElement(Element p) {
+
+    private void handleParagraphElement(Element p) {
         Elements children = p.children();
         for (Element e : children) {
             if (!e.hasText()) {
                 e.remove();
                 continue;
             }
-            if(inputBean.isReplaceTagU()){
+            if (inputBean.isReplaceTagU()) {
                 if (e.tagName().equals("u")) {
                     e.tagName("span");
                     e.attr("class", "font14zd");
@@ -92,7 +92,8 @@ public class ParseToFormatHtml {
             }
         }
     }
-    public String parseTable(Element element) {
+
+    private String handleTableElement(Element element) {
         // style="border-collapse: collapse;" border="1" cellspacing="0" cellpadding="5"
         element.attr("class", "font14")
                 .attr("border", "1")
@@ -108,8 +109,13 @@ public class ParseToFormatHtml {
             Elements tdElements = tr.children();
             for (Element td : tdElements) {
                 Elements children = td.children();
-                for (Element pElement : children) {
-                    handlePElement(pElement);
+                for (Element child : children) {
+                    String childTagName = child.tagName();
+                    if (childTagName.equals(ParseHtmlConstant.TAG_P)) {
+                        handleParagraphElement(child);
+                    } else if (childTagName.equals(ParseHtmlConstant.TAG_TABLE)) {
+                        handleTableElement(child);
+                    }
                 }
             }
         }

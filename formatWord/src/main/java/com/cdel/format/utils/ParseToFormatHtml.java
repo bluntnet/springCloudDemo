@@ -71,6 +71,8 @@ public class ParseToFormatHtml {
             } else if (tagName.equals(ParseHtmlConstant.TAG_TABLE)) {
                 String content = handleTableElement(element);
                 sb.append(content);
+            } else {
+                sb.append(element.outerHtml());
             }
         }
         sb.append(ParseHtmlConstant.NODE_TEXT_END + END_LINE);

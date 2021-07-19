@@ -21,6 +21,7 @@ public class IndexController {
     @RequestMapping(value = "/convert", method = RequestMethod.POST)
     @ResponseBody
     public SimpleResult convert(InputBean inputBean) {
+        log.debug(inputBean.getContent());
         ParseToFormatHtml parse = new ParseToFormatHtml(inputBean);
         String parseContent = parse.parseStringToHtml();
         String content = parse.handleImageTag(parseContent);

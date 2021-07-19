@@ -30,7 +30,7 @@ public class MyZuulFallbackProvider implements FallbackProvider {
 
             @Override
             public InputStream getBody() throws IOException {
-                return new ByteArrayInputStream("暂时不可能，请稍候再试..".getBytes());
+                return new ByteArrayInputStream("暂时不可用，请稍候再试..".getBytes());
             }
 
             @Override

@@ -2,6 +2,7 @@
 <!DOCTYPE configuration>
 <configuration>
 	<property name="log.level" value="debug" />
+    <property name="log.path" value="D:\\java_projects" />
     <appender name="warn" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>WARN</level>
